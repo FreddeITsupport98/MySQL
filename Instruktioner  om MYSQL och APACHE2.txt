@@ -1,0 +1,233 @@
+man ln (Visar vertyg och manual till commandon)
+
+ls (visar derectiv)
+ln -s (skaper en linkname (synlink) som är länk)
+
+apt install lamp-server^ (inbyggd server)
+
+***************************************************************
+fb@DESKTOP-AKOPNAE:~$ man ln
+fb@DESKTOP-AKOPNAE:~$ ls
+fb@DESKTOP-AKOPNAE:~$ ls -la
+total 8
+drwxr-xr-x 1 fb   fb   4096 Sep  5 09:01 .
+drwxr-xr-x 1 root root 4096 Sep  5 08:45 ..
+-rw-r--r-- 1 fb   fb    220 Sep  5 08:45 .bash_logout
+-rw-r--r-- 1 fb   fb   3771 Sep  5 08:45 .bashrc
+-rw-r--r-- 1 fb   fb    807 Sep  5 08:45 .profile
+-rw-r--r-- 1 fb   fb      0 Sep  5 09:01 .sudo_as_admin_successful
+fb@DESKTOP-AKOPNAE:~$ ls -la /mnt/c/code/
+total 0
+drwxrwxrwx 1 fb fb 4096 Sep  3 20:00 .
+drwxrwxrwx 1 fb fb 4096 Sep  5 08:42 ..
+drwxrwxrwx 1 fb fb 4096 Sep  3 19:59 MySQL
+drwxrwxrwx 1 fb fb 4096 Sep  3 20:00 PHP
+drwxrwxrwx 1 fb fb 4096 Sep  3 20:00 WSP
+drwxrwxrwx 1 fb fb 4096 Sep  3 20:00 python
+fb@DESKTOP-AKOPNAE:~$ ln -s /mnt/c/code/ code
+fb@DESKTOP-AKOPNAE:~$ ls -la
+total 8
+drwxr-xr-x 1 fb   fb   4096 Sep  5 09:08 .
+drwxr-xr-x 1 root root 4096 Sep  5 08:45 ..
+-rw-r--r-- 1 fb   fb    220 Sep  5 08:45 .bash_logout
+-rw-r--r-- 1 fb   fb   3771 Sep  5 08:45 .bashrc
+-rw-r--r-- 1 fb   fb    807 Sep  5 08:45 .profile
+-rw-r--r-- 1 fb   fb      0 Sep  5 09:01 .sudo_as_admin_successful
+*****************************************************************
+
+MySQL
+
+fb@DESKTOP-AKOPNAE:~$ mysql -u username -p
+
+mysql> create database torsdag;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use torsdag (Månste använda databasen först för att få fram describe)
+Database changed
+mysql> create table tweet;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table tweet
+    -> ;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> describe tweet
+    -> ;
+ERROR 1146 (42S02): Table 'torsdag.tweet' doesn't exist
+mysql> describe tweet;
+ERROR 1146 (42S02): Table 'torsdag.tweet' doesn't exist
+mysql> create table tweet;
+ERROR 1113 (42000): A table must have at least 1 column
+mysql> create table tweet (id int unsigned auto_increment, Primary key (id)) engine = innod;
+ERROR 1286 (42000): Unknown storage engine 'innod'
+mysql> create table tweet (id int unsigned auto_increment, Primary key (id)) engine = innodb;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> describe tweet;
++-------+------------------+------+-----+---------+----------------+
+| Field | Type             | Null | Key | Default | Extra          |
++-------+------------------+------+-----+---------+----------------+
+| id    | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
++-------+------------------+------+-----+---------+----------------+
+1 row in set (0.02 sec)
+
+mysql> alter table tweet add (boddt varchar(140) not null);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe tweet;
++-------+------------------+------+-----+---------+----------------+
+| Field | Type             | Null | Key | Default | Extra          |
++-------+------------------+------+-----+---------+----------------+
+| id    | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| boddt | varchar(140)     | NO   |     | NULL    |                |
++-------+------------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> create table users (id int unsigned auto_increment, primary key (id)) engine = innodb;
+
+mysql> describe tweet;
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| boddt      | varchar(140)     | NO   |     | NULL    |                |
+| body       | varchar(140)     | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
+| user_id    | int(10) unsigned | YES  | MUL | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+ alter table users add name varchar(32) not null;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe tweet
+    -> ;
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| boddt      | varchar(140)     | NO   |     | NULL    |                |
+| body       | varchar(140)     | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
+| user_id    | int(10) unsigned | YES  | MUL | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table users add password varchar(255) not null;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table  users add email varchar(255) not null;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE users ADD created_at TIMESTAMP NULL, ADD updated_at TIMESTAMP NULL;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table users add unique(email);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe tweet
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| boddt      | varchar(140)     | NO   |     | NULL    |                |
+| body       | varchar(140)     | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
+| user_id    | int(10) unsigned | YES  | MUL | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+insert into users (name, password, created_at, updated_at, email) values ("fredrik", "x", now(), now(), "x@y");
+
+mysql> describe users
+    -> ;
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(32)      | NO   |     | NULL    |                |
+| password   | varchar(255)     | NO   |     | NULL    |                |
+| email      | varchar(255)     | NO   | UNI | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> describe tweet;
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| boddt (fel)| varchar(140)     | NO   |     | NULL    |                |
+| body       | varchar(140)     | NO   |     | NULL    |                |
+| created_at | timestamp        | YES  |     | NULL    |                |
+| updated_at | timestamp        | YES  |     | NULL    |                |
+| user_id    | int(10) unsigned | YES  | MUL | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
+
+mysql> alter table tweet drop column boddt;  (För boddt)
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from users
+    -> ;
++----+---------+----------+-------+---------------------+---------------------+
+| id | name    | password | email | created_at          | updated_at          |
++----+---------+----------+-------+---------------------+---------------------+
+|  1 | fredrik | x        | x@y   | 2019-09-05 10:24:12 | 2019-09-05 10:24:12 |
++----+---------+----------+-------+---------------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into tweet (body, created_at, updated_at, user_id) values ("hello world", now(), now(), 1);
+Query OK, 1 row affected (0.00 sec)
+
+select * from tweet join users on tweet.user_id = users.id; (Visar fullständig)
++----+-------------+---------------------+---------------------+---------+----+---------+----------+-------+---------------------+---------------------+
+| id | body        | created_at          | updated_at          | user_id | id | name    | password | email | created_at          | updated_at          |
++----+-------------+---------------------+---------------------+---------+----+---------+----------+-------+---------------------+---------------------+
+|  1 | hello world | 2019-09-05 10:30:53 | 2019-09-05 10:30:53 |       1 |  1 | fredrik | x        | x@y   | 2019-09-05 10:24:12 | 2019-09-05 10:24:12 |
++----+-------------+---------------------+---------------------+---------+----+---------+----------+-------+---------------------+---------------------+
+1 row in set (0.01 sec)
+
+mysql> select tweet. * from tweet join users on tweet.user_id = users.id;
++----+-------------+---------------------+---------------------+---------+
+| id | body        | created_at          | updated_at          | user_id |
++----+-------------+---------------------+---------------------+---------+
+|  1 | hello world | 2019-09-05 10:30:53 | 2019-09-05 10:30:53 |       1 |
++----+-------------+---------------------+---------------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select tweet.*, users.name from tweet join users on tweet.user_id = users.id where tweet.id = 2;
+Empty set (0.00 sec) (Slår ihop user id för att få fram user name)
+
+mysql> select * from tweet join users on tweet.user_id = users.id where tweet.id = 2;
+Empty set (0.00 sec) (Är mer selectiv om användernamnet)
+
+msyql> select tweet.*, users.name from tweet join users on tweet.user_id = users.id;
++----+-------------+---------------------+---------------------+---------+---------+
+| id | body        | created_at          | updated_at          | user_id | name    |
++----+-------------+---------------------+---------------------+---------+---------+
+|  1 | hello world | 2019-09-05 10:30:53 | 2019-09-05 10:30:53 |       1 | fredrik |
++----+-------------+---------------------+---------------------+---------+---------+
+1 row in set (0.00 sec)
+
+*********************************************************************
+
+Apache2
+
+inom php7.config
+
+
+#<IfModule mod_userdir.c>
+#    <Directory /home/*/public_html>
+#        php_admin_flag engine Off
+#    </Directory>
+#</IfModule>
+                
